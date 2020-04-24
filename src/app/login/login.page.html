@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding-vertical">
+
+    <p class="ion-text-center ion-margin-vertical">
+      <ion-avatar class="ion-text-center">
+        <img src="assets/images/login_img.png"> </ion-avatar>
+    </p>
+
+  </div>
+  <ion-card class=" ion-no-margin ion-margin-horizontal ion-margin-top">
+    <form [formGroup]="postForm" (ngSubmit)="login()">
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input autofocus="true" type="email" required formControlName="email" name="email">
+        </ion-input>
+        <ion-icon slot="end" size="small" *ngIf="submitted && !f.email.errors && !f.email.errors?.required"
+          color="success" name="checkmark-circle"></ion-icon>
+        <ion-icon slot="end" size="small" *ngIf="submitted && f.email.errors && f.email.errors?.required" color="danger"
+          name="close-circle"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input autofocus="true" type="password" required formControlName="password" name="password">
+        </ion-input>
+        <ion-icon slot="end" size="small" *ngIf="submitted && !f.password.errors && !f.password.errors?.required"
+          color="success" name="checkmark-circle"></ion-icon>
+        <ion-icon slot="end" size="small" *ngIf="submitted && f.password.errors && f.password.errors?.required"
+          color="danger" name="close-circle"></ion-icon>
+      </ion-item>
+
+
+      <ion-button type="submit" class="ion-margin" expand="block">Login</ion-button>
+      <p class="ion-text-center">Don't have an account? <a href="javascript:void(0)" [routerLink]="['/register']">Create
+          one</a>
+      </p>
+    </form>
+    <ion-item>
+      <ion-label position="floating">type</ion-label>
+      <ion-select [(ngModel)]="type" cancelText="Dismiss">
+        <ion-select-option value="staff">Lecturer</ion-select-option>
+        <ion-select-option value="student">Student</ion-select-option>
+      </ion-select>
+
+    </ion-item>
+  </ion-card>
+</ion-content>

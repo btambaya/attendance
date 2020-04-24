@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create new Course</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card class=" ion-no-margin ion-margin-horizontal ion-margin-top">
+    <form [formGroup]="postForm" (ngSubmit)="createCourse()">
+      <ion-item>
+        <ion-label position="floating">Course Title</ion-label>
+        <ion-input autofocus="true" type="text" required formControlName="title" name="title">
+        </ion-input>
+        <ion-icon slot="end" size="small" *ngIf="submitted && !f.title.errors && !f.title.errors?.required"
+          color="success" name="checkmark-circle"></ion-icon>
+        <ion-icon slot="end" size="small" *ngIf="submitted && f.title.errors && f.title.errors?.required" color="danger"
+          name="close-circle"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Course code</ion-label>
+        <ion-input autofocus="true" type="text" required formControlName="code" name="code">
+        </ion-input>
+        <ion-icon slot="end" size="small" *ngIf="submitted && !f.code.errors && !f.code.errors?.required"
+          color="success" name="checkmark-circle"></ion-icon>
+        <ion-icon slot="end" size="small" *ngIf="submitted && f.code.errors && f.code.errors?.required" color="danger"
+          name="close-circle"></ion-icon>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Credit Unit</ion-label>
+        <ion-select required formControlName="credit_unit" okText="Okay" cancelText="Dismiss">
+          <ion-select-option value="1">1 </ion-select-option>
+          <ion-select-option value="2">2</ion-select-option>
+          <ion-select-option value="3">3</ion-select-option>
+          <ion-select-option value="4">4</ion-select-option>
+        </ion-select>
+
+        <ion-icon slot="end" size="small" *ngIf="submitted && !f.credit_unit.errors && !f.credit_unit.errors?.required"
+          color="success" name="checkmark-circle"></ion-icon>
+        <ion-icon slot="end" size="small" *ngIf="submitted && f.credit_unit.errors && f.credit_unit.errors?.required"
+          color="danger" name="close-circle"></ion-icon>
+      </ion-item>
+
+      <ion-button type="submit" class="ion-margin" expand="block">Create</ion-button>
+    </form>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title [hidden]="userType != 'staff'">All Courses</ion-title>
+    <ion-title [hidden]="userType != 'student'">My Courses</ion-title>
+    <ion-buttons slot="end">
+
+      <ion-button [hidden]="userType != 'staff'" color="success" (click)="createCourse()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+      <ion-button [hidden]="userType != 'student'" color="success" (click)="addCourse()">
+        <ion-icon name="add-circle-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item [hidden]="userType != 'staff'" *ngFor="let item of courses">
+      <ion-label>{{item.title}}</ion-label>
+    </ion-item>
+    <ion-item [hidden]="userType != 'student'" *ngFor="let item of load">
+      <ion-label>{{item.title}}
+
+        <p>
+          <ion-icon *ngIf="calculateAttendance(item.lectures ) < 40" color="danger"
+            name="checkmark-done-circle-outline"></ion-icon>
+          <ion-icon color="warning"
+            *ngIf="calculateAttendance(item.lectures ) > 40 && calculateAttendance(item.lectures ) < 70"
+            name="checkmark-done-circle-outline"></ion-icon>
+          <ion-icon color="success" *ngIf="calculateAttendance(item.lectures ) > 70"
+            name="checkmark-done-circle-outline"></ion-icon>
+          {{calculateAttendance(item.lectures )}}
+          attended
+        </p>
+      </ion-label>
+    </ion-item>
+
+  </ion-list>
+</ion-content>

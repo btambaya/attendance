@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Create an account</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-card class=" ion-no-margin ion-margin-horizontal ion-margin-top">
+    <form [formGroup]="postForm" (ngSubmit)="register()">
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input autofocus="true" type="text" required formControlName="name" name="name">
+        </ion-input>
+        <ion-icon slot="end" size="small" *ngIf="submitted && !f.name.errors && !f.name.errors?.required"
+          color="success" name="checkmark-circle"></ion-icon>
+        <ion-icon slot="end" size="small" *ngIf="submitted && f.name.errors && f.name.errors?.required" color="danger"
+          name="close-circle"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Registration No.</ion-label>
+        <ion-input autofocus="true" type="text" required formControlName="regNo" name="regNo">
+        </ion-input>
+        <ion-icon slot="end" size="small" *ngIf="submitted && !f.regNo.errors && !f.regNo.errors?.required"
+          color="success" name="checkmark-circle"></ion-icon>
+        <ion-icon slot="end" size="small" *ngIf="submitted && f.regNo.errors && f.regNo.errors?.required" color="danger"
+          name="close-circle"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Department</ion-label>
+        <ion-select required formControlName="department" okText="Okay" cancelText="Dismiss">
+          <ion-select-option value="brown">Brown</ion-select-option>
+          <ion-select-option value="blonde">Blonde</ion-select-option>
+          <ion-select-option value="black">Black</ion-select-option>
+          <ion-select-option value="red">Red</ion-select-option>
+        </ion-select>
+        <ion-icon slot="end" size="small" *ngIf="submitted && !f.department.errors && !f.department.errors?.required"
+          color="success" name="checkmark-circle"></ion-icon>
+        <ion-icon slot="end" size="small" *ngIf="submitted && f.department.errors && f.department.errors?.required"
+          color="danger" name="close-circle"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input autofocus="true" type="email" required formControlName="email" name="email">
+        </ion-input>
+        <ion-icon slot="end" size="small" *ngIf="submitted && !f.email.errors && !f.email.errors?.required"
+          color="success" name="checkmark-circle"></ion-icon>
+        <ion-icon slot="end" size="small" *ngIf="submitted && f.email.errors && f.email.errors?.required" color="danger"
+          name="close-circle"></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Password</ion-label>
+        <ion-input autofocus="true" type="password" required formControlName="password" name="password">
+        </ion-input>
+        <ion-icon slot="end" size="small" *ngIf="submitted && !f.password.errors && !f.password.errors?.required"
+          color="success" name="checkmark-circle"></ion-icon>
+        <ion-icon slot="end" size="small" *ngIf="submitted && f.password.errors && f.password.errors?.required"
+          color="danger" name="close-circle"></ion-icon>
+      </ion-item>
+
+
+      <ion-button type="submit" class="ion-margin" expand="block">Register</ion-button>
+    </form>
+  </ion-card>
+</ion-content>
