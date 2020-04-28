@@ -1,0 +1,7 @@
+<ion-list>
+  <ion-item (click)="sendQR()" *ngIf="userType == 'staff'" color="dark">Generate QR code</ion-item>
+  <ion-item *ngIf="userType == 'staff'" color="dark">View Details</ion-item>
+
+  <ion-item *ngIf="userType =='student'" color="dark">Mark Attendance</ion-item>
+
+</ion-list>

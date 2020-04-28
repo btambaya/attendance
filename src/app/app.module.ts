@@ -9,9 +9,10 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { CourseDetailsPipe } from './course-details.pipe';
+import { QRScanner } from '@ionic-native/qr-scanner/ngx';
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, CourseDetailsPipe],
   entryComponents: [],
   imports: [
     BrowserModule,
@@ -21,6 +22,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   providers: [
     StatusBar,
     SplashScreen,
+    QRScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]

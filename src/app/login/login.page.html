@@ -17,12 +17,12 @@
   <ion-card class=" ion-no-margin ion-margin-horizontal ion-margin-top">
     <form [formGroup]="postForm" (ngSubmit)="login()">
       <ion-item>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input autofocus="true" type="email" required formControlName="email" name="email">
+        <ion-label position="floating">School ID</ion-label>
+        <ion-input autofocus="true" type="text" required formControlName="id" name="id">
         </ion-input>
-        <ion-icon slot="end" size="small" *ngIf="submitted && !f.email.errors && !f.email.errors?.required"
-          color="success" name="checkmark-circle"></ion-icon>
-        <ion-icon slot="end" size="small" *ngIf="submitted && f.email.errors && f.email.errors?.required" color="danger"
+        <ion-icon slot="end" size="small" *ngIf="submitted && !f.id.errors && !f.id.errors?.required" color="success"
+          name="checkmark-circle"></ion-icon>
+        <ion-icon slot="end" size="small" *ngIf="submitted && f.id.errors && f.id.errors?.required" color="danger"
           name="close-circle"></ion-icon>
       </ion-item>
       <ion-item>
@@ -41,13 +41,6 @@
           one</a>
       </p>
     </form>
-    <ion-item>
-      <ion-label position="floating">type</ion-label>
-      <ion-select [(ngModel)]="type" cancelText="Dismiss">
-        <ion-select-option value="staff">Lecturer</ion-select-option>
-        <ion-select-option value="student">Student</ion-select-option>
-      </ion-select>
 
-    </ion-item>
   </ion-card>
 </ion-content>

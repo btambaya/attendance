@@ -1,5 +1,7 @@
 {
   "name": "bmpass",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

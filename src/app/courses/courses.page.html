@@ -16,10 +16,12 @@
 
 <ion-content>
   <ion-list>
-    <ion-item [hidden]="userType != 'staff'" *ngFor="let item of courses">
+    <ion-item href="javascript:void(0)" (click)="openCourse(item)" [hidden]="userType != 'staff'"
+      *ngFor="let item of myCourses">
       <ion-label>{{item.title}}</ion-label>
     </ion-item>
-    <ion-item [hidden]="userType != 'student'" *ngFor="let item of load">
+    <ion-item href="javascript:void(0)" (click)="openCourse(item)" [hidden]="userType != 'student'"
+      *ngFor="let item of myCourses">
       <ion-label>{{item.title}}
 
         <p>

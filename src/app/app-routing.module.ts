@@ -34,6 +34,10 @@ const routes: Routes = [
   {
     path: 'add-course',
     loadChildren: () => import('./add-course/add-course.module').then( m => m.AddCoursePageModule)
+  },
+  {
+    path: 'course-details',
+    loadChildren: () => import('./course-details/course-details.module').then( m => m.CourseDetailsPageModule)
   }
 ];
 
