@@ -72,6 +72,7 @@ export class CoursesPage implements OnInit {
     }
     else {
       this.courses = courses
+      this.myCourses = courses
     }
   }
 

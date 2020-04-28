@@ -39,28 +39,32 @@
         <small>{{item.date}},
           {{item.time}}
         </small>
-        <p *ngIf="userType == 'staff'" style="color:white; vertical-align: top;">
-          <ion-icon *ngIf="calculateAttendance(item) < 40" color="danger" name="checkmark-done-circle-outline">
-          </ion-icon>
-          <ion-icon color="warning" *ngIf="calculateAttendance(item ) > 40 && calculateAttendance(item ) < 70"
-            name="checkmark-done-circle-outline"></ion-icon>
-          <ion-icon color="success" *ngIf="calculateAttendance(item ) > 70" name="checkmark-done-circle-outline">
-          </ion-icon>
-          {{calculateAttendance(item)}}
-          attended
-        </p>
-        <p *ngIf="userType == 'student'" d style="color:white; vertical-align: top;">
-          <small *ngIf="calculateStudentAttendance(item) ==  false">
-            <ion-icon color="danger" name="close-circle-outline">
+        <ion-text color="dark">
+          <p *ngIf="userType == 'staff'">
+            <ion-icon *ngIf="calculateAttendance(item) < 40" color="danger" name="checkmark-done-circle-outline">
             </ion-icon>
-            Unattended
-          </small>
-          <small *ngIf="calculateStudentAttendance(item) == true">
-            <ion-icon color="success" name="checkmark-done-circle-outline">
+            <ion-icon color="warning" *ngIf="calculateAttendance(item ) > 40 && calculateAttendance(item ) < 70"
+              name="checkmark-done-circle-outline"></ion-icon>
+            <ion-icon color="success" *ngIf="calculateAttendance(item ) > 70" name="checkmark-done-circle-outline">
             </ion-icon>
-            Attended
-          </small>
-        </p>
+            {{calculateAttendance(item)}}%
+            attended
+          </p>
+
+
+          <p *ngIf="userType == 'student'">
+            <small *ngIf="calculateStudentAttendance(item) ==  false">
+              <ion-icon color="danger" name="close-circle-outline">
+              </ion-icon>
+              Unattended
+            </small>
+            <small *ngIf="calculateStudentAttendance(item) == true">
+              <ion-icon color="success" name="checkmark-done-circle-outline">
+              </ion-icon>
+              Attended
+            </small>
+          </p>
+        </ion-text>
       </ion-label>
       <!-- <ion-note>
         <ion-text color="dark">

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavParams } from '@ionic/angular';
-import { QRScanner, QRScannerStatus } from '@ionic-native/qr-scanner/ngx';
+import { NavParams, PopoverController } from '@ionic/angular';
+
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
 declare let Email: any;
 declare let QRious: any;
 @Component({
@@ -14,7 +16,7 @@ export class CourseOptionsComponent implements OnInit {
   lecture: any;
   user: any;
 
-  constructor(private navParams: NavParams, private qrScanner: QRScanner) {
+  constructor(private navParams: NavParams, private popoverController: PopoverController, private barcodeScanner: BarcodeScanner) {
     this.userType = localStorage.getItem('type');
     this.user = JSON.parse(localStorage.getItem('user'));
     this.lecture = navParams.get('lecture');
@@ -26,10 +28,11 @@ export class CourseOptionsComponent implements OnInit {
 
   }
   sendQR() {
-    let dets = { course: this.course, lecture: this.lecture, student: this.user.id }
+    let dets = JSON.stringify({ course: this.course, lecture: this.lecture });
 
     var qr = new QRious({
-      value: 'https://github.com/neocotic/qrious'
+      value: dets,
+
     });
     let data = qr.toDataURL();
     console.log(data);
@@ -47,30 +50,16 @@ export class CourseOptionsComponent implements OnInit {
     });
 
   }
-  attend() {
-    this.qrScanner.prepare()
-      .then((status: QRScannerStatus) => {
-        if (status.authorized) {
-          // camera permission was granted
+  async attend() {
+    this.barcodeScanner.scan().then(barcodeData => {
+      console.log('Barcode data', barcodeData);
+      this.dismsiss(barcodeData)
+    }).catch(err => {
+      console.log('Error', err);
+    });
 
-
-          // start scanning
-          let scanSub = this.qrScanner.scan().subscribe((text: string) => {
-            console.log('Scanned something', text);
-
-            this.qrScanner.hide(); // hide camera preview
-            scanSub.unsubscribe(); // stop scanning
-          });
-
-        } else if (status.denied) {
-          // camera permission was permanently denied
-          // you must use QRScanner.openSettings() method to guide the user to the settings page
-          // then they can grant the permission from there
-        } else {
-          // permission was denied, but not permanently. You can ask for permission again at a later time.
-        }
-      })
-      .catch((e: any) => console.log('Error is', e));
-
+  }
+  async dismsiss(data) {
+    await this.popoverController.dismiss(JSON.parse(data.text));
   }
 }

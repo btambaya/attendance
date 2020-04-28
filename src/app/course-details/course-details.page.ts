@@ -16,12 +16,16 @@ export class CourseDetailsPage implements OnInit {
   regStudents: any;
   userType: any;
   user: any;
+  courses: any;
 
   constructor(private route: ActivatedRoute, private popoverController: PopoverController, private router: Router) {
     this.students = JSON.parse(localStorage.getItem('students'));
     this.staff = JSON.parse(localStorage.getItem('staff'));
     this.user = JSON.parse(localStorage.getItem('user'));
     this.userType = localStorage.getItem('type');
+    let courses = JSON.parse(localStorage.getItem('courses'));
+    this.courses = courses
+    console.log(this.courses);
 
   }
 
@@ -40,17 +44,43 @@ export class CourseDetailsPage implements OnInit {
     console.log(this.currentStaff);
 
   }
-  async presentPopover(data, ev: any) {
+  async presentPopover(cdata, ev: any) {
     const popover = await this.popoverController.create({
       component: CourseOptionsComponent,
       componentProps: {
         course: this.course.id,
-        lecture: data.id
+        lecture: cdata.id
       },
       event: ev,
       translucent: true,
       animated: true,
       showBackdrop: true
+    });
+    popover.onDidDismiss().then(data => {
+      if (data.data != undefined) {
+
+        console.log(data);
+        let att = data.data
+        console.log(att);
+        cdata.attendance.push(this.user.id);
+
+        // let att =  JSON.parse(data.text)
+        this.courses.forEach(el => {
+          if (el.id == att.course) {
+            console.log(el);
+
+            el.lectures.forEach(element => {
+              if (element.id == att.lecture) {
+                console.log(el);
+
+                element.attendance.push(this.user.id);
+              }
+            });
+          }
+        });
+
+        localStorage.setItem('courses', JSON.stringify(this.courses));
+      }
     });
     return await popover.present();
   }

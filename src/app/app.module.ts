@@ -10,19 +10,21 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CourseDetailsPipe } from './course-details.pipe';
-import { QRScanner } from '@ionic-native/qr-scanner/ngx';
+
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 @NgModule({
   declarations: [AppComponent, CourseDetailsPipe],
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({ mode: 'ios' }),
     AppRoutingModule, ReactiveFormsModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    QRScanner,
+
+    BarcodeScanner,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],
   bootstrap: [AppComponent]
