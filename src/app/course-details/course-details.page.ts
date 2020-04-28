@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { PopoverController } from '@ionic/angular';
+import { PopoverController, ModalController } from '@ionic/angular';
 import { CourseOptionsComponent } from './course-options/course-options.component';
+import { AttendanceComponent } from './attendance/attendance.component';
+import { Toast } from '@ionic-native/toast/ngx';
+import { ToolService } from '../tool.service';
 
 @Component({
   selector: 'app-course-details',
@@ -18,7 +21,7 @@ export class CourseDetailsPage implements OnInit {
   user: any;
   courses: any;
 
-  constructor(private route: ActivatedRoute, private popoverController: PopoverController, private router: Router) {
+  constructor(private route: ActivatedRoute, private toast: Toast, private tool: ToolService, private modalController: ModalController, private popoverController: PopoverController, private router: Router) {
     this.students = JSON.parse(localStorage.getItem('students'));
     this.staff = JSON.parse(localStorage.getItem('staff'));
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -44,19 +47,20 @@ export class CourseDetailsPage implements OnInit {
     console.log(this.currentStaff);
 
   }
+
   async presentPopover(cdata, ev: any) {
     const popover = await this.popoverController.create({
       component: CourseOptionsComponent,
       componentProps: {
         course: this.course.id,
-        lecture: cdata.id
+        lecture: cdata
       },
       event: ev,
       translucent: true,
       animated: true,
       showBackdrop: true
     });
-    popover.onDidDismiss().then(data => {
+    popover.onDidDismiss().then(async data => {
       if (data.data != undefined) {
 
         console.log(data);
@@ -80,10 +84,15 @@ export class CourseDetailsPage implements OnInit {
         });
 
         localStorage.setItem('courses', JSON.stringify(this.courses));
+        this.tool.presentToastWithOptions('Attendance recieved successfully', 500, 'success');
+
       }
     });
+
     return await popover.present();
   }
+
+
   calculateAttendance(course) {
     let attended = 0
 

@@ -8,6 +8,7 @@ import { CourseDetailsPageRoutingModule } from './course-details-routing.module'
 
 import { CourseDetailsPage } from './course-details.page';
 import { CourseOptionsComponent } from './course-options/course-options.component';
+import { AttendanceComponent } from './attendance/attendance.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,7 @@ import { CourseOptionsComponent } from './course-options/course-options.componen
     IonicModule,
     CourseDetailsPageRoutingModule
   ],
-  declarations: [CourseDetailsPage, CourseOptionsComponent],
-  bootstrap: [CourseOptionsComponent]
+  declarations: [CourseDetailsPage, CourseOptionsComponent, AttendanceComponent],
+  bootstrap: [CourseOptionsComponent, AttendanceComponent]
 })
 export class CourseDetailsPageModule { }

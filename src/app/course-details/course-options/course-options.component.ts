@@ -1,5 +1,7 @@
+import { Toast } from '@ionic-native/toast/ngx';
+import { AttendanceComponent } from './../attendance/attendance.component';
 import { Component, OnInit } from '@angular/core';
-import { NavParams, PopoverController } from '@ionic/angular';
+import { NavParams, PopoverController, ModalController } from '@ionic/angular';
 
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
@@ -15,12 +17,14 @@ export class CourseOptionsComponent implements OnInit {
   course: any;
   lecture: any;
   user: any;
+  students: any;
 
-  constructor(private navParams: NavParams, private popoverController: PopoverController, private barcodeScanner: BarcodeScanner) {
+  constructor(private navParams: NavParams, private toast: Toast, private modalController: ModalController, private popoverController: PopoverController, private barcodeScanner: BarcodeScanner) {
     this.userType = localStorage.getItem('type');
     this.user = JSON.parse(localStorage.getItem('user'));
     this.lecture = navParams.get('lecture');
     this.course = navParams.get('course');
+    this.students = JSON.parse(localStorage.getItem('students'));
 
   }
 
@@ -28,7 +32,7 @@ export class CourseOptionsComponent implements OnInit {
 
   }
   sendQR() {
-    let dets = JSON.stringify({ course: this.course, lecture: this.lecture });
+    let dets = JSON.stringify({ course: this.course, lecture: this.lecture.id });
 
     var qr = new QRious({
       value: dets,
@@ -61,5 +65,27 @@ export class CourseOptionsComponent implements OnInit {
   }
   async dismsiss(data) {
     await this.popoverController.dismiss(JSON.parse(data.text));
+  }
+  async openAttendance() {
+    let students = this.students.filter(student => this.lecture.attendance.includes(student.id))
+    const modal = await this.modalController.create({
+      component: AttendanceComponent,
+      componentProps: {
+        students: students,
+      }
+    });
+    return await modal.present();
+  }
+  async openMnen(data, ev: any) {
+
+    this.toast.show(`Checking Location`, '10000', 'bottom').subscribe(
+      toast => {
+        console.log(toast);
+        this.attend();
+
+      }
+    );
+
+
   }
 }

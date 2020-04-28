@@ -46,7 +46,7 @@ export class CoursesPage implements OnInit {
     lecturer_id: 182003,
     attendance: [],
     lectures: [
-      { id: 1, attendance: [], date: "20-05-2020", time: "9am", venue: "A115", status: true },
+      { id: 1, attendance: [16113001, 16113002, 16113005, 16113004], date: "20-05-2020", time: "9am", venue: "A115", status: true },
       { id: 2, attendance: [], date: "18-05-2020", time: "9am", venue: "A302", status: false },
       { id: 3, attendance: [], date: "14-05-2020", time: "9am", venue: "B304", status: true },
       { id: 4, attendance: [], date: "12-05-2020", time: "9am", venue: "B324", status: true },
